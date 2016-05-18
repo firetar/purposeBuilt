@@ -6,4 +6,9 @@
     <string name="login">Login</string>
     <string name="signUp">Sign Up</string>
     <string name="angel">desc</string>
+    <string name="title_activity_navigation">Navigation</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="title_activity_navi">Navi</string>
 </resources>
