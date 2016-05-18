@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:context=".Login"
-    android:background="#e1000000">
+    android:background="#F5F5F5">
 
 
     <ImageView
@@ -27,7 +27,7 @@
         android:ems="10"
         android:id="@+id/userName"
         android:hint="@string/userName"
-        android:textColorHint="#ff7eff15"
+        android:textColorHint="#66BB6A"
         android:layout_marginTop="32dp"
         android:layout_below="@+id/angel"
         android:layout_alignParentLeft="true"
@@ -39,11 +39,11 @@
         android:inputType="textPassword"
         android:ems="10"
         android:id="@+id/password"
+        android:textColorHint="#66BB6A"
         android:layout_below="@+id/userName"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:hint="Password"
-        android:textColorHint="#ff7eff15" />
+        android:hint="Password" />
 
     <Button
         android:layout_width="100dp"
@@ -53,6 +53,7 @@
         android:layout_alignTop="@+id/loginbtn"
         android:layout_toLeftOf="@+id/loginbtn"
         android:layout_toStartOf="@+id/loginbtn"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:onClick="onClick" />
 
     <Button
@@ -68,6 +69,7 @@
         android:layout_alignRight="@+id/angel"
         android:layout_alignEnd="@+id/angel"
         android:layout_marginRight="53dp"
+        style="@style/Widget.AppCompat.Button.Colored"
         android:layout_marginEnd="53dp"
        />
 

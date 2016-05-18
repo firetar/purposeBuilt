@@ -1,8 +1,6 @@
 package richard.mike.com.purposebuilt;
 
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -12,12 +10,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-public class  Login extends AppCompatActivity {
+public class  Login extends AppCompatActivity implements View.OnClickListener {
 
-EditText userName,password;
-
-
-
+    //make these private as not used elsewhere
+    private EditText userName,password;
+    private Button  loginBtn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,38 +23,8 @@ EditText userName,password;
 
         userName =(EditText) findViewById(R.id.userName);
         password=(EditText)findViewById(R.id.password);
-
-
-        final Button  loginBtn = (Button) findViewById(R.id.loginbtn);
-
-        loginBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                if (userName.getText().toString().equals("legend")&& password.getText().toString().equals ("123123") ) {
-                    Toast.makeText(Login.this,"Logging In",Toast.LENGTH_LONG).show();
-
-                    loginBtn.setBackgroundColor(Color.RED);
-                    Intent intent=new Intent(Login.this,Navi.class);
-                    startActivity(intent);
-
-
-
-                }else{
-                    Toast.makeText(Login.this ,"Please Enter the correct UserName or Password",Toast.LENGTH_LONG).show();
-                }
-            }
-        });}
-
-
-
-
-
-    public void onClick (View view){
-          Intent i=new Intent (this,SignUp.class);
-          startActivity (i);
-
-
+        loginBtn = (Button) findViewById(R.id.loginbtn);
+        loginBtn.setOnClickListener(this);
     }
 
     @Override
@@ -80,5 +47,33 @@ EditText userName,password;
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    //use this block to handle all clicks
+    @Override
+    public void onClick(View v) {
+        switch(v.getId())
+        {
+            case R.id.loginbtn:
+
+                if (validatePassword()) {
+                    Intent intent=new Intent(Login.this,Navi.class);
+                    startActivity(intent);
+                }else{
+                    Toast.makeText(Login.this ,"Incorrect login details",Toast.LENGTH_LONG).show();
+                }
+        }
+    }
+
+    //neater to do validation in its own method
+    //let onclick method handle clicks
+    //let validation method handle its stuff
+    private Boolean validatePassword()
+    {
+        Boolean valid = false;
+        if (userName.getText().toString().equals("legend")&& password.getText().toString().equals ("123123") ) {
+            valid = true;
+        }
+        return valid;
     }
 }
