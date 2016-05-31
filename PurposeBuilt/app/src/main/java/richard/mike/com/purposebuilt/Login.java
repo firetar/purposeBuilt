@@ -25,6 +25,7 @@ public class  Login extends AppCompatActivity implements View.OnClickListener {
         password=(EditText)findViewById(R.id.password);
         loginBtn = (Button) findViewById(R.id.loginbtn);
         loginBtn.setOnClickListener(this);
+
     }
 
     @Override
@@ -71,7 +72,7 @@ public class  Login extends AppCompatActivity implements View.OnClickListener {
     private Boolean validatePassword()
     {
         Boolean valid = false;
-        if (userName.getText().toString().equals("legend")&& password.getText().toString().equals ("123123") ) {
+        if (userName.getText().toString().equals("1")&& password.getText().toString().equals ("1") ) {
             valid = true;
         }
         return valid;

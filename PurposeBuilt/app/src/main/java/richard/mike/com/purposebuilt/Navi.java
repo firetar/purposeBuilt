@@ -1,36 +1,43 @@
 package richard.mike.com.purposebuilt;
 
-import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.view.View;
-import android.support.design.widget.NavigationView;
-import android.support.v4.view.GravityCompat;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 
-public class Navi extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+        import android.content.Context;
+        import android.database.DataSetObserver;
+        import android.os.Bundle;
+        import android.view.View;
+        import android.view.ViewGroup;
+        import android.widget.AdapterView;
+        import android.widget.ListAdapter;
+        import android.widget.ListView;
+        import android.support.design.widget.NavigationView;
+        import android.support.v4.view.GravityCompat;
+        import android.support.v4.widget.DrawerLayout;
+        import android.support.v7.app.ActionBarDrawerToggle;
+        import android.support.v7.app.AppCompatActivity;
+        import android.support.v7.widget.Toolbar;
+        import android.view.Menu;
+        import android.view.MenuItem;
+        import android.widget.ArrayAdapter;
+        import android.widget.SimpleAdapter;
+        import android.widget.Toast;
+
+        import java.lang.reflect.Array;
+        import java.util.ArrayList;
+        import java.util.HashMap;
+        import java.util.List;
+
+
+public class Navi extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navi);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -40,7 +47,29 @@ public class Navi extends AppCompatActivity
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-    }
+
+
+
+        String [] prgNameList ={   "January","Febuary","March","April","May","June","July","August","September","October","November","December"};
+        ListAdapter mikeAdapter =new customerAdapter(this,prgNameList);
+        ListView mikeListView=(ListView)findViewById(R.id.listview);
+        mikeListView.setAdapter(mikeAdapter);
+
+
+
+
+
+
+        mikeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                String prgNameList=String.valueOf(parent.getItemAtPosition(position));
+                Toast.makeText(Navi.this,prgNameList, Toast.LENGTH_SHORT).show();
+            }
+        } );
+
+}
+
 
     @Override
     public void onBackPressed() {
@@ -50,6 +79,8 @@ public class Navi extends AppCompatActivity
         } else {
             super.onBackPressed();
         }
+
+
     }
 
     @Override
@@ -99,3 +130,4 @@ public class Navi extends AppCompatActivity
         return true;
     }
 }
+
