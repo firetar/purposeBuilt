@@ -28,14 +28,7 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/toolbar"
-        android:transcriptMode="alwaysScroll"
         android:textSize="20sp"
-        android:nestedScrollingEnabled="true"
          />
-
-
-
-
-
     </android.support.design.widget.CoordinatorLayout>
 
