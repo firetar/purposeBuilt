@@ -1,6 +1,7 @@
 package richard.mike.com.purposebuilt;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -13,6 +14,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -27,8 +29,6 @@ public class Navi extends AppCompatActivity implements  NavigationView.OnNavigat
         setContentView(R.layout.activity_navi);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
@@ -38,28 +38,29 @@ public class Navi extends AppCompatActivity implements  NavigationView.OnNavigat
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-
-
-        String [] prgNameList ={   "January","Febuary","March","April","May","June","July","August","September","October","November","December"};
+        String [] prgNameList ={"January","Febuary","March","April","May","June","July","August","September","October","November","December"};
 //        ListAdapter mikeAdapter =new customerAdapter(this,prgNameList);
 
-        ListView mikeListView=(ListView)findViewById(R.id.listview);
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, prgNameList);
-        mikeListView.setAdapter(adapter);
+        final ListAdapter mikeAdapter =new CustomAdapter(this,prgNameList);
+        final ListView mikeListView=(ListView)findViewById(R.id.listview);
+        mikeListView.setAdapter(mikeAdapter);
 //        mikeListView.setAdapter(mikeAdapter);
-
-
-
         mikeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String prgNameList=String.valueOf(parent.getItemAtPosition(position));
-                Toast.makeText(Navi.this,prgNameList, Toast.LENGTH_SHORT).show();
-            }
-        } );
+            Str
 
-}
 
+
+
+
+
+
+      }
+
+                }
+            });
+        }
 
     @Override
     public void onBackPressed() {
@@ -69,17 +70,13 @@ public class Navi extends AppCompatActivity implements  NavigationView.OnNavigat
         } else {
             super.onBackPressed();
         }
-
-
     }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.navi, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
@@ -91,10 +88,8 @@ public class Navi extends AppCompatActivity implements  NavigationView.OnNavigat
         if (id == R.id.action_settings) {
             return true;
         }
-
         return super.onOptionsItemSelected(item);
     }
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {

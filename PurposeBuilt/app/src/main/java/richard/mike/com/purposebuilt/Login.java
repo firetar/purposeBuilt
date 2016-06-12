@@ -14,7 +14,8 @@ public class  Login extends AppCompatActivity implements View.OnClickListener {
 
     //make these private as not used elsewhere
     private EditText userName,password;
-    private Button  loginBtn;
+    private Button  loginBtn,signUpBtn;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,6 +28,9 @@ public class  Login extends AppCompatActivity implements View.OnClickListener {
         password.setText("1");
         loginBtn = (Button) findViewById(R.id.loginbtn);
         loginBtn.setOnClickListener(this);
+        signUpBtn=(Button)findViewById(R.id.signUpBtn);
+        signUpBtn.setOnClickListener(this);
+
 
     }
 
@@ -65,8 +69,14 @@ public class  Login extends AppCompatActivity implements View.OnClickListener {
                 }else{
                     Toast.makeText(Login.this ,"Incorrect login details",Toast.LENGTH_LONG).show();
                 }
+            case R.id.signUpBtn:
+                Intent intent=new Intent(Login.this,SignUp.class);
+                startActivity(intent);
+
+
         }
     }
+
 
     //neater to do validation in its own method
     //let onclick method handle clicks
