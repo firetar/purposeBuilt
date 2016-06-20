@@ -61,21 +61,28 @@ public class  Login extends AppCompatActivity implements View.OnClickListener {
     public void onClick(View v) {
         switch(v.getId())
         {
-            case R.id.loginbtn:
+            case R.id.signUpBtn:
+                Intent i=new Intent (Login.this,SignUp.class);
+                startActivity(i);break;
 
+            case R.id.loginbtn:
                 if (validatePassword()) {
                     Intent intent=new Intent(Login.this,Navi.class);
                     startActivity(intent);
                 }else{
                     Toast.makeText(Login.this ,"Incorrect login details",Toast.LENGTH_LONG).show();
                 }
-            case R.id.signUpBtn:
-                Intent intent=new Intent(Login.this,SignUp.class);
-                startActivity(intent);
+
+
+
 
 
         }
+
     }
+
+
+
 
 
     //neater to do validation in its own method

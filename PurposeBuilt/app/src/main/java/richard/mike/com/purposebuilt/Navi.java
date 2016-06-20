@@ -3,7 +3,12 @@ package richard.mike.com.purposebuilt;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,12 +19,21 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.CalendarView;
+import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.Toast;
 
+import java.io.FileDescriptor;
+import java.io.PrintWriter;
+import java.util.Calendar;
+import java.util.List;
+
 
 public class Navi extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
+String []months;
+CalendarView FragmentHolder;
 
 
 
@@ -28,6 +42,8 @@ public class Navi extends AppCompatActivity implements  NavigationView.OnNavigat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navi);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+
+
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -38,29 +54,29 @@ public class Navi extends AppCompatActivity implements  NavigationView.OnNavigat
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        String [] prgNameList ={"January","Febuary","March","April","May","June","July","August","September","October","November","December"};
 //        ListAdapter mikeAdapter =new customerAdapter(this,prgNameList);
 
-        final ListAdapter mikeAdapter =new CustomAdapter(this,prgNameList);
-        final ListView mikeListView=(ListView)findViewById(R.id.listview);
+        months = getResources().getStringArray(R.array.prgnameList);
+        final ListAdapter mikeAdapter = new CustomAdapter(this, months);
+        final ListView mikeListView = (ListView) findViewById(R.id.listview);
         mikeListView.setAdapter(mikeAdapter);
+FragmentHolder=(CalendarView) findViewById(R.id.calendarView);
 //        mikeListView.setAdapter(mikeAdapter);
         mikeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-            Str
 
 
+                CalenderViewFragment fragment = new CalenderViewFragment();
+                FragmentManager fragmentManager = getSupportFragmentManager();
+                fragmentManager.beginTransaction().replace(R.id.fragmentHolder,fragment).commit();
+                mikeListView.setVisibility(view.GONE);
+               FragmentHolder.setVisibility(view.VISIBLE);
+            }
 
+        });
+    }
 
-
-
-
-      }
-
-                }
-            });
-        }
 
     @Override
     public void onBackPressed() {
@@ -115,4 +131,3 @@ public class Navi extends AppCompatActivity implements  NavigationView.OnNavigat
         return true;
     }
 }
-
