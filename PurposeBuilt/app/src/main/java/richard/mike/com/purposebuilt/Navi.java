@@ -1,15 +1,20 @@
 package richard.mike.com.purposebuilt;
 
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.ListFragment;
 import android.support.v4.view.GravityCompat;
+import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,18 +28,13 @@ import android.widget.CalendarView;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import java.io.FileDescriptor;
-import java.io.PrintWriter;
-import java.util.Calendar;
-import java.util.List;
+
 
 
 public class Navi extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
-String []months;
-CalendarView FragmentHolder;
-
+    String []months;
+    CalendarView FragmentHolder;
 
 
     @Override
@@ -42,7 +42,6 @@ CalendarView FragmentHolder;
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_navi);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-
 
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -53,81 +52,79 @@ CalendarView FragmentHolder;
 
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
-
-//        ListAdapter mikeAdapter =new customerAdapter(this,prgNameList);
+        //ListAdapter mikeAdapter =new customerAdapter(this,prgNameList);
 
         months = getResources().getStringArray(R.array.prgnameList);
-        final ListAdapter mikeAdapter = new CustomAdapter(this, months);
-        final ListView mikeListView = (ListView) findViewById(R.id.listview);
-        mikeListView.setAdapter(mikeAdapter);
-FragmentHolder=(CalendarView) findViewById(R.id.calendarView);
+            final ListAdapter mikeAdapter = new CustomerAdapter(this, months);
+            final ListView mikeListView = (ListView) findViewById(R.id.listview);
+            mikeListView.setAdapter(mikeAdapter);
+            FragmentHolder=(CalendarView) findViewById(R.id.caldendarView);
 //        mikeListView.setAdapter(mikeAdapter);
-        mikeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            mikeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-
-                CalenderViewFragment fragment = new CalenderViewFragment();
-                FragmentManager fragmentManager = getSupportFragmentManager();
-                fragmentManager.beginTransaction().replace(R.id.fragmentHolder,fragment).commit();
-                mikeListView.setVisibility(view.GONE);
-               FragmentHolder.setVisibility(view.VISIBLE);
-            }
-
-        });
-    }
+                public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
 
-    @Override
-    public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        if (drawer.isDrawerOpen(GravityCompat.START)) {
-            drawer.closeDrawer(GravityCompat.START);
-        } else {
-            super.onBackPressed();
+                    myFragment fragment = new myFragment();
+                    FragmentManager fragmentManager = getSupportFragmentManager();
+                    fragmentManager.beginTransaction().replace(R.id.fragmentHolder,fragment).commit();
+                    mikeListView.setVisibility(view.GONE);
+                    FragmentHolder.setVisibility(view.VISIBLE);
+                }
+
+            });
         }
-    }
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.navi, menu);
-        return true;
-    }
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
+        @Override
+        public void onBackPressed() {
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            if (drawer.isDrawerOpen(GravityCompat.START)) {
+                drawer.closeDrawer(GravityCompat.START);
+            } else {
+                super.onBackPressed();
+            }
+        }
+        @Override
+        public boolean onCreateOptionsMenu(Menu menu) {
+            // Inflate the menu; this adds items to the action bar if it is present.
+            getMenuInflater().inflate(R.menu.navi, menu);
             return true;
         }
-        return super.onOptionsItemSelected(item);
-    }
-    @SuppressWarnings("StatementWithEmptyBody")
-    @Override
-    public boolean onNavigationItemSelected(MenuItem item) {
-        // Handle navigation view item clicks here.
-        int id = item.getItemId();
+        @Override
+        public boolean onOptionsItemSelected(MenuItem item) {
+            // Handle action bar item clicks here. The action bar will
+            // automatically handle clicks on the Home/Up button, so long
+            // as you specify a parent activity in AndroidManifest.xml.
+            int id = item.getItemId();
 
-        if (id == R.id.nav_camera) {
-            // Handle the camera action
-        } else if (id == R.id.nav_gallery) {
+            //noinspection SimplifiableIfStatement
+            if (id == R.id.action_settings) {
+                return true;
+            }
+            return super.onOptionsItemSelected(item);
+        }
+        @SuppressWarnings("StatementWithEmptyBody")
+        @Override
+        public boolean onNavigationItemSelected(MenuItem item) {
+            // Handle navigation view item clicks here.
+            int id = item.getItemId();
 
-        } else if (id == R.id.nav_slideshow) {
+            if (id == R.id.nav_camera) {
+                // Handle the camera action
+            } else if (id == R.id.nav_gallery) {
 
-        } else if (id == R.id.nav_manage) {
+            } else if (id == R.id.nav_slideshow) {
 
-        } else if (id == R.id.nav_share) {
+            } else if (id == R.id.nav_manage) {
 
-        } else if (id == R.id.nav_send) {
+            } else if (id == R.id.nav_share) {
 
+            } else if (id == R.id.nav_send) {
+
+            }
+
+            DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+            drawer.closeDrawer(GravityCompat.START);
+            return true;
         }
 
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        drawer.closeDrawer(GravityCompat.START);
-        return true;
-    }
 }
