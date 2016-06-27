@@ -1,20 +1,10 @@
 package richard.mike.com.purposebuilt;
 
 
-import android.app.ActionBar;
-import android.content.Intent;
 import android.os.Bundle;
-import android.support.annotation.IdRes;
 import android.support.design.widget.NavigationView;
-import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.ListFragment;
 import android.support.v4.view.GravityCompat;
-import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
@@ -23,9 +13,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.CalendarView;
-import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -34,7 +21,7 @@ import android.widget.ListView;
 
 public class Navi extends AppCompatActivity implements  NavigationView.OnNavigationItemSelectedListener {
     String []months;
-    CalendarView FragmentHolder;
+//    CalendarView FragmentHolder;
 
 
     @Override
@@ -58,7 +45,7 @@ public class Navi extends AppCompatActivity implements  NavigationView.OnNavigat
             final ListAdapter mikeAdapter = new CustomerAdapter(this, months);
             final ListView mikeListView = (ListView) findViewById(R.id.listview);
             mikeListView.setAdapter(mikeAdapter);
-            FragmentHolder=(CalendarView) findViewById(R.id.caldendarView);
+//            FragmentHolder=(CalendarView) findViewById(R.id.caldendarView);
 //        mikeListView.setAdapter(mikeAdapter);
             mikeListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -69,7 +56,7 @@ public class Navi extends AppCompatActivity implements  NavigationView.OnNavigat
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.fragmentHolder,fragment).commit();
                     mikeListView.setVisibility(view.GONE);
-                    FragmentHolder.setVisibility(view.VISIBLE);
+//                    FragmentHolder.setVisibility(view.VISIBLE);
                 }
 
             });
