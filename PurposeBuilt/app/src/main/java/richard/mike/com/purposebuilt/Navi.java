@@ -64,7 +64,7 @@ public class Navi extends AppCompatActivity implements  NavigationView.OnNavigat
 
                 public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
 
-
+                    //my Fragment
                     myFragment fragment = new myFragment();
                     FragmentManager fragmentManager = getSupportFragmentManager();
                     fragmentManager.beginTransaction().replace(R.id.fragmentHolder,fragment).commit();
